@@ -1,0 +1,52 @@
+@import '../../../assets/scss/vars';
+
+$cellWidth: 140px;
+
+.ticketComponent {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    &Price {
+      font-weight: bold;
+      font-size: 24px;
+      color: $highlightedColor;
+      width: $cellWidth;
+      margin-top: 4px;
+      margin-left: 1px;
+    }
+
+    &Logo {
+      width: $cellWidth;
+    }
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+
+    &Column {
+      width: $cellWidth;
+
+      &Item {
+        margin-top: 15px;
+
+        &Header {
+          font-weight: bold;
+          font-size: 12px;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          color: #a0b0b9;
+        }
+
+        &Value {
+          font-weight: bold;
+          font-size: 14px;
+          color: #4a4a4a;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}

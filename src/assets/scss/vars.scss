@@ -1,0 +1,27 @@
+%containerBase {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+%container {
+  @extend %containerBase;
+  padding: 20px 0;
+  @media screen and (max-width: 560px) {
+    padding: 3% 0;
+  }
+}
+
+%contentContainer {
+  @extend %containerBase;
+  padding: 20px;
+  @media screen and (max-width: 560px) {
+    padding: 3%;
+  }
+}
+
+$colorBlue: #2196f3;
+
+$borderColor: #dfe5ec;
+$borderColorHover: $colorBlue;
+$highlightedColor: $colorBlue;

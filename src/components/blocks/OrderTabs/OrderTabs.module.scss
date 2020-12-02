@@ -1,0 +1,49 @@
+@import '../../../assets/scss/vars';
+
+$border: 1px solid $borderColor;
+
+.orderTabs {
+  display: flex;
+
+  &__tab {
+    outline: none;
+    border-top: $border;
+    border-bottom: $border;
+    border-left: none;
+    border-right: none;
+    height: 50px;
+    background-color: #ffffff;
+    color: #000;
+    width: 100%;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:first-child {
+      border-left: $border;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    &:last-child {
+      border-right: $border;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
+    &:hover {
+      border-color: $borderColorHover;
+    }
+
+    &_stateActive {
+      background-color: $borderColorHover;
+      border-color: $borderColorHover;
+      color: #ffffff;
+
+      &:hover {
+        border-color: $borderColor;
+      }
+    }
+  }
+}

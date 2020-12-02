@@ -1,0 +1,62 @@
+.ticketsFilter {
+  display: flex;
+  flex-direction: column;
+  color: #4a4a4a;
+
+  &__tittle {
+    padding: 0 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  &__item {
+    padding: 10px 20px;
+    font-size: 13px;
+    position: relative;
+    display: flex;
+    cursor: pointer;
+
+    @media screen and (max-width: 560px) {
+      padding: 1.5% 3%;
+    }
+
+    &:hover {
+      background-color: #f1fcff;
+    }
+
+    &:last-child {
+      margin-bottom: -10px;
+      @media screen and (max-width: 560px) {
+        margin-bottom: -1.5%;
+      }
+    }
+
+    &Input {
+      opacity: 0;
+      position: absolute;
+    }
+
+    &Checkmark {
+      position: relative;
+      top: 0;
+      left: 0;
+      height: 20px;
+      width: 20px;
+      border: 1px solid #9abbce;
+      box-sizing: border-box;
+      border-radius: 2px;
+    }
+
+    &Input:checked ~ &Checkmark {
+      background: url('../../../assets/img/Shape.svg') no-repeat 3px;
+    }
+
+    &Label {
+      padding-left: 11px;
+      padding-top: 3px;
+    }
+  }
+}
