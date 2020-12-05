@@ -1,6 +1,11 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import styles from './TicketsFilter.module.scss';
+
+import * as actions from '../../../store/actions';
+import { FilterItemData, StateData } from '../../../store/reducer';
 
 export type TicketsFilterItem = {
   code: string;
@@ -9,14 +14,20 @@ export type TicketsFilterItem = {
 };
 
 type TicketsFilterProps = {
-  items: TicketsFilterItem[];
+  filterItems: Map<string, FilterItemData>;
+  checkFn: (code: string) => void;
 };
 
-function TicketsFilter(props: TicketsFilterProps) {
-  const { items } = props;
-  const itemsNode = items.map(({ code, label, isChecked }) => (
-    <label className={styles.ticketsFilter__item}>
-      <input name={code} className={styles.ticketsFilter__itemInput} type="checkbox" checked={isChecked} />
+function TicketsFilter({ filterItems, checkFn }: TicketsFilterProps) {
+  const itemsNode = Array.from(filterItems).map(([code, { label, isChecked }]) => (
+    <label key={code} className={styles.ticketsFilter__item}>
+      <input
+        onChange={() => checkFn(code)}
+        name={code}
+        className={styles.ticketsFilter__itemInput}
+        type="checkbox"
+        checked={isChecked}
+      />
       <span className={styles.ticketsFilter__itemCheckmark} />
       <span className={styles.ticketsFilter__itemLabel}>{label}</span>
     </label>
@@ -29,4 +40,10 @@ function TicketsFilter(props: TicketsFilterProps) {
   );
 }
 
-export default TicketsFilter;
+export default connect(
+  ({ filterItems }: StateData) => ({ filterItems }),
+  (dispatch) => {
+    const { checkFn } = bindActionCreators(actions, dispatch);
+    return { checkFn };
+  },
+)(TicketsFilter);
