@@ -51,8 +51,10 @@ function TicketComponent({ ticket }: TicketComponentProps) {
 
   const makeStopsLabel = (stropsCount: number): string => {
     if (stropsCount === 0) return 'нет пересадок';
-    if ([2, 3, 4].includes(stropsCount % 10) && ![12, 13, 14].includes(stropsCount % 100))
+    if ([2, 3, 4].includes(stropsCount % 10) && ![12, 13, 14].includes(stropsCount % 100)) {
       return `${stropsCount} пересадки`;
+    }
+
     if (stropsCount % 10 === 1) return `${stropsCount} пересадка`;
     return `${stropsCount} пересадок`;
   };
