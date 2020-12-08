@@ -8,15 +8,9 @@ import reducer from './store/reducer';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const composeEnhancers =
-  typeof window === 'object' &&
-  // @ts-ignore
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? // @ts-ignore
-      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-        // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
-      })
-    : compose;
+// @ts-ignore
+const reduxDevTols = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+const composeEnhancers = typeof window === 'object' && reduxDevTols ? reduxDevTols({}) : compose;
 
 const store = createStore(reducer, composeEnhancers(applyMiddleware(reduxThunk)));
 
