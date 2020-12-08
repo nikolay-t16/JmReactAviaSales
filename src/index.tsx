@@ -1,13 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
+import reduxThunk from 'redux-thunk';
 
 import reducer from './store/reducer';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const store = createStore(reducer);
+const composeEnhancers =
+  typeof window === 'object' &&
+  // @ts-ignore
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? // @ts-ignore
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+        // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+      })
+    : compose;
+
+const store = createStore(reducer, composeEnhancers(applyMiddleware(reduxThunk)));
 
 ReactDOM.render(
   <React.StrictMode>

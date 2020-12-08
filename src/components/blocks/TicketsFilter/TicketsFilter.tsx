@@ -14,8 +14,8 @@ export type TicketsFilterItem = {
 };
 
 type TicketsFilterProps = {
-  filterItems: Map<string, FilterItemData>;
-  checkFn: (code: string) => void;
+  filterItems: Map<number, FilterItemData>;
+  checkFn: (code: number) => void;
 };
 
 function TicketsFilter({ filterItems, checkFn }: TicketsFilterProps) {
@@ -23,7 +23,6 @@ function TicketsFilter({ filterItems, checkFn }: TicketsFilterProps) {
     <label key={code} className={styles.ticketsFilter__item}>
       <input
         onChange={() => checkFn(code)}
-        name={code}
         className={styles.ticketsFilter__itemInput}
         type="checkbox"
         checked={isChecked}
