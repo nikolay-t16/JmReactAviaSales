@@ -1,21 +1,26 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import styles from './OrderTabs.module.scss';
 
+import { StateData } from '../../../store/reducer';
+import * as actions from '../../../store/actions';
+
 type OrderTabsProps = {
-  tabs: string[];
-  activeTab: number;
-  onChange: (tabIndex: number) => void;
+  orderTabs: string[];
+  orderType: number;
+  checkOrderTab: (tab: number) => void;
 };
 
-function OrderTabs(props: OrderTabsProps) {
-  const { tabs, activeTab, onChange } = props;
-  const arrTabsNode = tabs.map((tabName, tabIndex) => (
+function OrderTabs({ orderTabs, orderType, checkOrderTab }: OrderTabsProps) {
+  const arrTabsNode = orderTabs.map((tabName, tabIndex) => (
     <button
-      className={classNames(styles.orderTabs__tab, { [styles.orderTabs__tab_stateActive]: tabIndex === activeTab })}
+      className={classNames(styles.orderTabs__tab, { [styles.orderTabs__tab_stateActive]: tabIndex === orderType })}
       type="button"
-      onClick={() => onChange(tabIndex)}
+      onClick={() => checkOrderTab(tabIndex)}
       key={tabName}
     >
       {tabName}
@@ -24,4 +29,10 @@ function OrderTabs(props: OrderTabsProps) {
   return <div className={styles.orderTabs}>{arrTabsNode}</div>;
 }
 
-export default OrderTabs;
+export default connect(
+  ({ orderTabs, orderType }: StateData) => ({ orderTabs, orderType }),
+  (dispatch) => {
+    const { checkOrderTab } = bindActionCreators(actions, dispatch);
+    return { checkOrderTab };
+  },
+)(OrderTabs);

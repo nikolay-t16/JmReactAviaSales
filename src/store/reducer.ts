@@ -11,6 +11,8 @@ export type FilterItemData = {
 };
 export type StateData = {
   filterItems: Map<number, FilterItemData>;
+  orderType: number;
+  orderTabs: string[];
   tickets: TicketData[];
 };
 
@@ -25,14 +27,22 @@ export enum FilterTypes {
 const filterItems = new Map<number, FilterItemData>([
   [FilterTypes.ALL, { label: 'Все', isChecked: false }],
   [FilterTypes.NO_TRANSFER, { label: 'Без пересадок', isChecked: true }],
-  [FilterTypes.TRANSFER_1, { label: '1 пересадка', isChecked: true }],
-  [FilterTypes.TRANSFER_2, { label: '2 пересадки', isChecked: true }],
+  [FilterTypes.TRANSFER_1, { label: '1 пересадка', isChecked: false }],
+  [FilterTypes.TRANSFER_2, { label: '2 пересадки', isChecked: false }],
   [FilterTypes.TRANSFER_3, { label: '3 пересадки', isChecked: false }],
 ]);
 export const ACTION_CHECK = 'CHECK';
+export const ACTION_CHECK_ORDER_TAB = 'CHECK_ORDER_TAB';
 export const ACTION_ADD_TICKETS = 'ADD_TICKETS';
 
-const reducer = (state: StateData = { filterItems, tickets: [] }, { type, payload }: ActionData) => {
+const defaultState: StateData = {
+  orderTabs: ['Самый дешевый', 'Самый быстрый'],
+  orderType: 0,
+  filterItems,
+  tickets: [],
+};
+
+const reducer = (state: StateData = defaultState, { type, payload }: ActionData) => {
   const actions: any = {
     [ACTION_CHECK]: (code: number): StateData => {
       const newFilterItems = new Map(filterItems);
@@ -49,6 +59,9 @@ const reducer = (state: StateData = { filterItems, tickets: [] }, { type, payloa
         }
       }
       return { ...state, filterItems: newFilterItems };
+    },
+    [ACTION_CHECK_ORDER_TAB]: (code: number): StateData => {
+      return { ...state, orderType: code };
     },
     [ACTION_ADD_TICKETS]: (addTickets: TicketData[]): StateData => {
       const { tickets } = state;
