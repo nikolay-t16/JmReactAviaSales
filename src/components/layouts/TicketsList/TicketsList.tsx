@@ -133,7 +133,7 @@ const TicketsList = ({
   const ticketNodes = makeTicketNodes(filteredTickets);
   return (
     <div className={styles.ticketsList}>
-      {errorMessage !== '' ? <div style={{ color: 'red' }}>{errorMessage}</div> : null}
+      {errorMessage !== '' ? <div className={styles.ticketsList__error}>{errorMessage}</div> : null}
       {ticketNodes}
     </div>
   );
