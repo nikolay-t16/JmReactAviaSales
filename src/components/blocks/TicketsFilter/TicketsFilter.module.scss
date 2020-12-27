@@ -36,8 +36,11 @@
   }
 
   &Input {
-    opacity: 0;
     position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
   }
 
   &Checkmark {
@@ -50,7 +53,9 @@
     box-sizing: border-box;
     border-radius: 2px;
   }
-
+  &Input:focus + &Checkmark {
+    box-shadow: 0 0 0 0.1em #4A90E2, 0 0 0 0.2em #2196f3;
+  }
   &Input:checked ~ &Checkmark {
     background: url('../../../assets/img/Shape.svg') no-repeat 3px;
   }
