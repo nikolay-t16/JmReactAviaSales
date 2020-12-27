@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -8,6 +7,7 @@ import styles from './OrderTabs.module.scss';
 
 import { StateData } from '../../../store/reducer';
 import * as actions from '../../../store/actions';
+import OrderRadioInput from './OrderRadioInput/OrderRadioInput';
 
 type OrderTabsProps = {
   orderTabs: string[];
@@ -17,14 +17,14 @@ type OrderTabsProps = {
 
 function OrderTabs({ orderTabs, orderType, checkOrderTab }: OrderTabsProps) {
   const arrTabsNode = orderTabs.map((tabName, tabIndex) => (
-    <button
-      className={classNames(styles.tab, { [styles.tab_stateActive]: tabIndex === orderType })}
-      type="button"
-      onClick={() => checkOrderTab(tabIndex)}
+    <OrderRadioInput
       key={tabName}
-    >
-      {tabName}
-    </button>
+      name="orderTabs"
+      label={tabName}
+      value={tabIndex}
+      isChecked={tabIndex === orderType}
+      onClick={(index) => checkOrderTab(index)}
+    />
   ));
   return <div className={styles.root}>{arrTabsNode}</div>;
 }
