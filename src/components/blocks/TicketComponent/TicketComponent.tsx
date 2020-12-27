@@ -25,11 +25,11 @@ function TicketComponent({ ticket }: TicketComponentProps) {
   };
   const makeFlightScheduleNode = (segment: TicketSegmentData) => {
     return (
-      <div className={styles.infoColumnItem}>
-        <div className={styles.infoColumnItemHeader}>
+      <div className={styles.infoColumn}>
+        <div className={styles.infoColumnHeader}>
           {segment.origin} - {segment.destination}
         </div>
-        <div className={styles.infoColumnItemValue}>
+        <div className={styles.infoColumnValue}>
           {makeDepartureSchedule(Date.parse(segment.date), segment.duration * 60 * 1000)}
         </div>
       </div>
@@ -38,9 +38,9 @@ function TicketComponent({ ticket }: TicketComponentProps) {
 
   const makeDurationIfoNode = (segment: TicketSegmentData) => {
     return (
-      <div className={styles.infoColumnItem}>
-        <div className={styles.infoColumnItemHeader}>В пути</div>
-        <div className={styles.infoColumnItemValue}>
+      <div className={styles.infoColumn}>
+        <div className={styles.infoColumnHeader}>В пути</div>
+        <div className={styles.infoColumnValue}>
           {formatDistanceStrict(Date.parse(segment.date), Date.parse(segment.date) + segment.duration * 60 * 1000, {
             locale: ru,
           })}
@@ -61,9 +61,9 @@ function TicketComponent({ ticket }: TicketComponentProps) {
 
   const makeStopsInfoNode = (segment: TicketSegmentData) => {
     return (
-      <div className={styles.infoColumnItem}>
-        <div className={styles.infoColumnItemHeader}>{makeStopsLabel(segment.stops.length)}</div>
-        <div className={styles.infoColumnItemValue}>{segment.stops.join(', ')}</div>
+      <div className={styles.infoColumn}>
+        <div className={styles.infoColumnHeader}>{makeStopsLabel(segment.stops.length)}</div>
+        <div className={styles.infoColumnValue}>{segment.stops.join(', ')}</div>
       </div>
     );
   };
@@ -77,18 +77,14 @@ function TicketComponent({ ticket }: TicketComponentProps) {
         </div>
       </div>
       <div className={styles.info}>
-        <div className={styles.infoColumn}>
-          {makeFlightScheduleNode(forward)}
-          {makeFlightScheduleNode(back)}
-        </div>
-        <div className={styles.infoColumn}>
-          {makeDurationIfoNode(forward)}
-          {makeDurationIfoNode(back)}
-        </div>
-        <div className={styles.infoColumn}>
-          {makeStopsInfoNode(forward)}
-          {makeStopsInfoNode(back)}
-        </div>
+        {makeFlightScheduleNode(forward)}
+        {makeDurationIfoNode(forward)}
+        {makeStopsInfoNode(forward)}
+      </div>
+      <div className={styles.info}>
+        {makeFlightScheduleNode(back)}
+        {makeDurationIfoNode(back)}
+        {makeStopsInfoNode(back)}
       </div>
     </div>
   );

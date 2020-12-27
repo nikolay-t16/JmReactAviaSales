@@ -6,6 +6,7 @@ $cellWidth: 140px;
 .header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 5px;
 
   &Price {
     font-weight: bold;
@@ -24,28 +25,24 @@ $cellWidth: 140px;
 .info {
   display: flex;
   justify-content: space-between;
-  margin-top: 5px;
+  margin-top: 15px;
 
   &Column {
     width: $cellWidth;
 
-    &Item {
-      margin-top: 15px;
+    &Header {
+      font-weight: bold;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #a0b0b9;
+    }
 
-      &Header {
-        font-weight: bold;
-        font-size: 12px;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        color: #a0b0b9;
-      }
-
-      &Value {
-        font-weight: bold;
-        font-size: 14px;
-        color: #4a4a4a;
-        margin-top: 5px;
-      }
+    &Value {
+      font-weight: bold;
+      font-size: 14px;
+      color: #4a4a4a;
+      margin-top: 5px;
     }
   }
 }
