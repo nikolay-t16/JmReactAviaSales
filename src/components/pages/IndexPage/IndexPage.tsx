@@ -8,16 +8,16 @@ import TicketsList from '../../layouts/TicketsList/TicketsList';
 
 function IndexPage() {
   return (
-    <div className={styles.indexPage}>
-      <img className={styles.indexPage__logo} src="/Logo.png" alt="logo" />
-      <form className={styles.indexPage__form}>
-        <div className={styles.indexPage__formOrderTabs}>
+    <div className={styles.root}>
+      <img className={styles.logo} src="/Logo.png" alt="logo" />
+      <form className={styles.form}>
+        <div className={styles.formOrderTabs}>
           <OrderTabs />
         </div>
-        <div className={styles.indexPage__formFilter}>
+        <div className={styles.formFilter}>
           <TicketsFilter />
         </div>
-        <div className={styles.indexPage__formResults}>
+        <div className={styles.formResults}>
           <TicketsList />
         </div>
       </form>

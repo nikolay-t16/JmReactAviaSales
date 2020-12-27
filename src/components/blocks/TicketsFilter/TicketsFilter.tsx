@@ -20,20 +20,15 @@ type TicketsFilterProps = {
 
 function TicketsFilter({ filterItems, checkFn }: TicketsFilterProps) {
   const itemsNode = Array.from(filterItems).map(([code, { label, isChecked }]) => (
-    <label key={code} className={styles.ticketsFilter__item}>
-      <input
-        onChange={() => checkFn(code)}
-        className={styles.ticketsFilter__itemInput}
-        type="checkbox"
-        checked={isChecked}
-      />
-      <span className={styles.ticketsFilter__itemCheckmark} />
-      <span className={styles.ticketsFilter__itemLabel}>{label}</span>
+    <label key={code} className={styles.item}>
+      <input onChange={() => checkFn(code)} className={styles.itemInput} type="checkbox" checked={isChecked} />
+      <span className={styles.itemCheckmark} />
+      <span className={styles.itemLabel}>{label}</span>
     </label>
   ));
   return (
-    <div className={styles.ticketsFilter}>
-      <div className={styles.ticketsFilter__tittle}>Количество пересадок</div>
+    <div className={styles.root}>
+      <div className={styles.tittle}>Количество пересадок</div>
       {itemsNode}
     </div>
   );

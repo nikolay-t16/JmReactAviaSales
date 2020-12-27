@@ -25,11 +25,11 @@ function TicketComponent({ ticket }: TicketComponentProps) {
   };
   const makeFlightScheduleNode = (segment: TicketSegmentData) => {
     return (
-      <div className={styles.ticketComponent__infoColumnItem}>
-        <div className={styles.ticketComponent__infoColumnItemHeader}>
+      <div className={styles.infoColumnItem}>
+        <div className={styles.infoColumnItemHeader}>
           {segment.origin} - {segment.destination}
         </div>
-        <div className={styles.ticketComponent__infoColumnItemValue}>
+        <div className={styles.infoColumnItemValue}>
           {makeDepartureSchedule(Date.parse(segment.date), segment.duration * 60 * 1000)}
         </div>
       </div>
@@ -38,9 +38,9 @@ function TicketComponent({ ticket }: TicketComponentProps) {
 
   const makeDurationIfoNode = (segment: TicketSegmentData) => {
     return (
-      <div className={styles.ticketComponent__infoColumnItem}>
-        <div className={styles.ticketComponent__infoColumnItemHeader}>В пути</div>
-        <div className={styles.ticketComponent__infoColumnItemValue}>
+      <div className={styles.infoColumnItem}>
+        <div className={styles.infoColumnItemHeader}>В пути</div>
+        <div className={styles.infoColumnItemValue}>
           {formatDistanceStrict(Date.parse(segment.date), Date.parse(segment.date) + segment.duration * 60 * 1000, {
             locale: ru,
           })}
@@ -61,31 +61,31 @@ function TicketComponent({ ticket }: TicketComponentProps) {
 
   const makeStopsInfoNode = (segment: TicketSegmentData) => {
     return (
-      <div className={styles.ticketComponent__infoColumnItem}>
-        <div className={styles.ticketComponent__infoColumnItemHeader}>{makeStopsLabel(segment.stops.length)}</div>
-        <div className={styles.ticketComponent__infoColumnItemValue}>{segment.stops.join(', ')}</div>
+      <div className={styles.infoColumnItem}>
+        <div className={styles.infoColumnItemHeader}>{makeStopsLabel(segment.stops.length)}</div>
+        <div className={styles.infoColumnItemValue}>{segment.stops.join(', ')}</div>
       </div>
     );
   };
 
   return (
     <div className={styles.ticketComponent}>
-      <div className={styles.ticketComponent__header}>
-        <div className={styles.ticketComponent__headerPrice}>{price.toLocaleString('ru-RU')} Р</div>
-        <div className={styles.ticketComponent__headerLogo}>
+      <div className={styles.header}>
+        <div className={styles.headerPrice}>{price.toLocaleString('ru-RU')} Р</div>
+        <div className={styles.headerLogo}>
           <img src={`//pics.avs.io/99/36/${carrier}.png`} alt="" />
         </div>
       </div>
-      <div className={styles.ticketComponent__info}>
-        <div className={styles.ticketComponent__infoColumn}>
+      <div className={styles.info}>
+        <div className={styles.infoColumn}>
           {makeFlightScheduleNode(forward)}
           {makeFlightScheduleNode(back)}
         </div>
-        <div className={styles.ticketComponent__infoColumn}>
+        <div className={styles.infoColumn}>
           {makeDurationIfoNode(forward)}
           {makeDurationIfoNode(back)}
         </div>
-        <div className={styles.ticketComponent__infoColumn}>
+        <div className={styles.infoColumn}>
           {makeStopsInfoNode(forward)}
           {makeStopsInfoNode(back)}
         </div>

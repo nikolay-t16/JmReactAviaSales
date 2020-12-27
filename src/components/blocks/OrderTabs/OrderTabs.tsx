@@ -18,7 +18,7 @@ type OrderTabsProps = {
 function OrderTabs({ orderTabs, orderType, checkOrderTab }: OrderTabsProps) {
   const arrTabsNode = orderTabs.map((tabName, tabIndex) => (
     <button
-      className={classNames(styles.orderTabs__tab, { [styles.orderTabs__tab_stateActive]: tabIndex === orderType })}
+      className={classNames(styles.tab, { [styles.tab_stateActive]: tabIndex === orderType })}
       type="button"
       onClick={() => checkOrderTab(tabIndex)}
       key={tabName}
@@ -26,7 +26,7 @@ function OrderTabs({ orderTabs, orderType, checkOrderTab }: OrderTabsProps) {
       {tabName}
     </button>
   ));
-  return <div className={styles.orderTabs}>{arrTabsNode}</div>;
+  return <div className={styles.root}>{arrTabsNode}</div>;
 }
 
 export default connect(

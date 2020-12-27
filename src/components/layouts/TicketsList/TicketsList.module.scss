@@ -1,18 +1,18 @@
 @import '../../../assets/scss/vars';
 
-.ticketsList {
-  &__error {
-    background-color: #fff2f0;
-    border: 1px solid #ffccc7;
-    padding: 8px 15px;
-    margin-bottom: 20px;
-  }
-  &__ticket {
-    @extend %contentContainer;
-    height: fit-content;
-    margin-top: 20px;
-    &:first-child {
-      margin-top: 0;
-    }
+.error {
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  padding: 8px 15px;
+  margin-bottom: 20px;
+}
+
+.ticket {
+  @extend %contentContainer;
+  height: fit-content;
+  margin-top: 20px;
+
+  &:first-child {
+    margin-top: 0;
   }
 }

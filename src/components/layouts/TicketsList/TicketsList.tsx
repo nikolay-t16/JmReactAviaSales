@@ -117,7 +117,7 @@ const TicketsList = ({
     }
 
     const ticketsList = ticketItems.slice(0, 19).map((ticket) => (
-      <div className={styles.ticketsList__ticket}>
+      <div className={styles.ticket}>
         <TicketComponent key={makeTicketKey(ticket)} ticket={ticket} />
       </div>
     ));
@@ -132,8 +132,8 @@ const TicketsList = ({
 
   const ticketNodes = makeTicketNodes(filteredTickets);
   return (
-    <div className={styles.ticketsList}>
-      {errorMessage !== '' ? <div className={styles.ticketsList__error}>{errorMessage}</div> : null}
+    <div>
+      {errorMessage !== '' ? <div className={styles.error}>{errorMessage}</div> : null}
       {ticketNodes}
     </div>
   );
