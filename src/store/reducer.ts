@@ -45,19 +45,42 @@ const defaultState: StateData = {
 const reducer = (state: StateData = defaultState, { type, payload }: ActionData) => {
   const actions: any = {
     [ACTION_CHECK]: (code: number): StateData => {
+      const setAllChecked = (items: Map<number, FilterItemData>, isChecked: boolean): void => {
+        for (const [, item] of items) {
+          item.isChecked = isChecked;
+        }
+      };
+      const checkIsAllChecked = (items: Map<number, FilterItemData>): boolean => {
+        for (const [filterCode, item] of items) {
+          if (filterCode !== FilterTypes.ALL && !item.isChecked) {
+            return false;
+          }
+        }
+        return true;
+      };
+
       const newFilterItems = new Map(filterItems);
-      const item = filterItems.get(code);
-      if (item) {
-        item.isChecked = !item.isChecked;
+      const item = newFilterItems.get(code);
+
+      if (!item) {
+        return state;
       }
-      const filterItemAll = newFilterItems.get(FilterTypes.ALL) || ({} as any);
-      if (code !== FilterTypes.ALL) {
-        filterItemAll.isChecked = false;
-      } else if (filterItemAll.isChecked) {
-        for (const [filterCode, filterItem] of newFilterItems) {
-          if (filterCode !== FilterTypes.ALL) filterItem.isChecked = false;
+
+      const isChecked = !item.isChecked;
+      if (code === FilterTypes.ALL) {
+        setAllChecked(newFilterItems, isChecked);
+        return { ...state, filterItems: newFilterItems };
+      }
+
+      item.isChecked = isChecked;
+
+      if (!isChecked || checkIsAllChecked(newFilterItems)) {
+        const filterAll = newFilterItems.get(FilterTypes.ALL);
+        if (filterAll) {
+          filterAll.isChecked = isChecked;
         }
       }
+
       return { ...state, filterItems: newFilterItems };
     },
     [ACTION_CHECK_ORDER_TAB]: (code: number): StateData => {
