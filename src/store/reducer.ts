@@ -1,4 +1,5 @@
 import { TicketData } from '../components/pages/IndexPage/TicketData';
+import { ACTION_ADD_TICKETS, ACTION_CHECK, ACTION_CHECK_ORDER_TAB } from './types';
 
 type ActionData = {
   type: string;
@@ -31,9 +32,6 @@ const filterItems = new Map<number, FilterItemData>([
   [FilterTypes.TRANSFER_2, { label: '2 пересадки', isChecked: false }],
   [FilterTypes.TRANSFER_3, { label: '3 пересадки', isChecked: false }],
 ]);
-export const ACTION_CHECK = 'CHECK';
-export const ACTION_CHECK_ORDER_TAB = 'CHECK_ORDER_TAB';
-export const ACTION_ADD_TICKETS = 'ADD_TICKETS';
 
 const defaultState: StateData = {
   orderTabs: ['Самый дешевый', 'Самый быстрый'],

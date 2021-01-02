@@ -17,7 +17,7 @@ type TicketsListProps = {
   filterItems: Map<number, FilterItemData>;
   orderType: number;
   fetchTickets: () => Promise<{ tickets: TicketData[]; stop: boolean }>;
-  addTickets: (tickets: TicketData[]) => Promise<void>;
+  addTickets: (tickets: TicketData[]) => void;
   errorMessageTimeOut: any;
 };
 
@@ -74,19 +74,6 @@ const TicketsList = ({
   }: TicketData) => {
     return [carrier, origin, destination, date, dateBack, price, forwardStops, backStops].join('_');
   };
-  tickets.sort((fistTicket, secondTicket) => {
-    if (orderType === 0) {
-      if (fistTicket.price < secondTicket.price) return -1;
-      if (fistTicket.price > secondTicket.price) return 1;
-      return 0;
-    }
-    const fistTicketDuration = fistTicket.segments[0].duration + fistTicket.segments[1].duration;
-    const secondTicketDuration = secondTicket.segments[0].duration + secondTicket.segments[1].duration;
-
-    if (fistTicketDuration < secondTicketDuration) return -1;
-    if (fistTicketDuration > secondTicketDuration) return 1;
-    return 0;
-  });
 
   const filterTickets = () => {
     if (filterItems.get(FilterTypes.ALL)?.isChecked) return tickets;
@@ -108,7 +95,19 @@ const TicketsList = ({
     });
   };
 
-  const filteredTickets = filterTickets();
+  const sortTickets = (fistTicket: TicketData, secondTicket: TicketData) => {
+    if (orderType === 0) {
+      if (fistTicket.price < secondTicket.price) return -1;
+      if (fistTicket.price > secondTicket.price) return 1;
+      return 0;
+    }
+    const fistTicketDuration = fistTicket.segments[0].duration + fistTicket.segments[1].duration;
+    const secondTicketDuration = secondTicket.segments[0].duration + secondTicket.segments[1].duration;
+
+    if (fistTicketDuration < secondTicketDuration) return -1;
+    if (fistTicketDuration > secondTicketDuration) return 1;
+    return 0;
+  };
 
   const makeTicketNodes = (ticketItems: TicketData[]) => {
     if (ticketItems.length === 0) {
@@ -130,7 +129,12 @@ const TicketsList = ({
     );
   };
 
+  const filteredTickets = filterTickets();
+
+  filteredTickets.sort(sortTickets);
+
   const ticketNodes = makeTicketNodes(filteredTickets);
+
   return (
     <div>
       {errorMessage !== '' ? <div className={styles.error}>{errorMessage}</div> : null}

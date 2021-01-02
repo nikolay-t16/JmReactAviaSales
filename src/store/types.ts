@@ -1,0 +1,3 @@
+export const ACTION_CHECK = 'CHECK';
+export const ACTION_CHECK_ORDER_TAB = 'CHECK_ORDER_TAB';
+export const ACTION_ADD_TICKETS = 'ADD_TICKETS';

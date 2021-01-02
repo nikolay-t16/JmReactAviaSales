@@ -1,4 +1,4 @@
-import { ACTION_CHECK, ACTION_ADD_TICKETS, ACTION_CHECK_ORDER_TAB } from './reducer';
+import { ACTION_CHECK, ACTION_ADD_TICKETS, ACTION_CHECK_ORDER_TAB } from './types';
 import { TicketData } from '../components/pages/IndexPage/TicketData';
 
 export const checkFn = (payload: number) => ({ type: ACTION_CHECK, payload });
