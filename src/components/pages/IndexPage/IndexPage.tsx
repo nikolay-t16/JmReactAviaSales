@@ -9,7 +9,7 @@ import TicketsList from '../../layouts/TicketsList/TicketsList';
 function IndexPage() {
   return (
     <div className={styles.root}>
-      <img className={styles.logo} src="/Logo.png" alt="logo" />
+      <img className={styles.logo} src="/Logo.svg" width={82} alt="logo" />
       <form className={styles.form}>
         <div className={styles.formOrderTabs}>
           <OrderTabs />
