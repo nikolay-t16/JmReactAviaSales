@@ -73,7 +73,7 @@ function TicketComponent({ ticket }: TicketComponentProps) {
       <div className={styles.header}>
         <div className={styles.headerPrice}>{price.toLocaleString('ru-RU')} Р</div>
         <div className={styles.headerLogo}>
-          <img src={`//pics.avs.io/99/36/${carrier}.png`} alt="" />
+          <img src={`//pics.avs.io/99/36/${carrier}.png`} height={36} alt="" />
         </div>
       </div>
       <div className={styles.info}>

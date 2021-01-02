@@ -1,8 +1,11 @@
+import 'focus-visible';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
+
+import './index.scss';
 
 import reducer from './store/reducer';
 import App from './App';

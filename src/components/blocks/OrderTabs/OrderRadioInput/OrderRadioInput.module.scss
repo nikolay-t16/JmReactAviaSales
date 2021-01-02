@@ -37,6 +37,8 @@ $borderActiveHover: 2px solid $borderColorHover;
   &:hover, &.stateFocused{
     border-color: $borderColorHover;
     border-width: 2px;
+    border-right: 2px solid $borderColorHover;
+    border-left: 2px solid $borderColorHover;
   }
 }
 
