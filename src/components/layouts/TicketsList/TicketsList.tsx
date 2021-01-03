@@ -76,14 +76,18 @@ const TicketsList = ({
   };
 
   const filterTickets = () => {
-    if (filterItems.get(FilterTypes.ALL)?.isChecked) return tickets;
-    let filterIsEmpty = true;
-    filterItems.forEach((item) => {
-      if (item.isChecked) {
-        filterIsEmpty = false;
+    const isFilterEmpty = (): boolean => {
+      for (const [, item] of filterItems) {
+        if (item.isChecked) {
+          return false;
+        }
       }
-    });
-    if (filterIsEmpty) return [];
+      return true;
+    };
+
+    if (isFilterEmpty()) return [];
+
+    if (filterItems.get(FilterTypes.ALL)?.isChecked) return tickets;
 
     return tickets.filter((ticket) => {
       const stopsCount = ticket.segments[0].stops.length + ticket.segments[1].stops.length;
