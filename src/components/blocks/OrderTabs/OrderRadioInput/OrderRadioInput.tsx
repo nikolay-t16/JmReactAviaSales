@@ -47,7 +47,7 @@ const OrderRadioInput = ({ name, value, isChecked, onClick, label }: OrderRadioI
         className={styles.input}
         name={name}
         value={value}
-        onChange={() => onClick(value)}
+        onClick={() => onClick(value)}
         checked={isChecked}
       />
       {label}
