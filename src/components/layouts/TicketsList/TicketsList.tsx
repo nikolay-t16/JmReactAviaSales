@@ -157,7 +157,7 @@ const TicketsList = ({
     <div>
       {errorMessage !== '' ? <div className={styles.error}>{errorMessage}</div> : null}
       {ticketNodes}
-      {tickets.length > ticketsCount ? buttonMore : null}
+      {filteredTickets.length > ticketsCount ? buttonMore : null}
     </div>
   );
 };
