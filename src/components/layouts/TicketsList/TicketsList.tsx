@@ -29,8 +29,10 @@ const TicketsList = ({
   errorMessageTimeOut,
   orderType,
 }: TicketsListProps) => {
+  const countTicketsToAdd = 5;
   const [isFetching, setIsFetching] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [ticketsCount, setTicketsCount] = useState<number>(countTicketsToAdd);
 
   const timeOut = useRef(errorMessageTimeOut);
   useEffect(
@@ -119,7 +121,7 @@ const TicketsList = ({
       return <>Рейсов, подходящих под заданные фильтры, не найдено</>;
     }
 
-    const ticketsList = ticketItems.slice(0, 19).map((ticket) => (
+    const ticketsList = ticketItems.slice(0, ticketsCount - 1).map((ticket) => (
       <div className={styles.ticket}>
         <TicketComponent key={makeTicketKey(ticket)} ticket={ticket} />
       </div>
@@ -139,10 +141,23 @@ const TicketsList = ({
 
   const ticketNodes = makeTicketNodes(filteredTickets);
 
+  const buttonMore = (
+    <button
+      className={styles.buttonMore}
+      type="button"
+      onClick={() => {
+        setTicketsCount(ticketsCount + countTicketsToAdd);
+      }}
+    >
+      Еще
+    </button>
+  );
+
   return (
     <div>
       {errorMessage !== '' ? <div className={styles.error}>{errorMessage}</div> : null}
       {ticketNodes}
+      {tickets.length > ticketsCount ? buttonMore : null}
     </div>
   );
 };
